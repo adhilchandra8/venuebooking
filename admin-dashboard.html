@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Venue Booking System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="styles/calendar.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calendar-alt"></i>
+                <span>VenueBook</span>
+                <span class="admin-badge">Admin</span>
+            </a>
+            <div class="nav-menu">
+                <a href="admin-dashboard.html" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="add-venue.html" class="nav-link"><i class="fas fa-plus-circle"></i> Add Venue</a>
+                <a href="manage-bookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> Manage Bookings</a>
+                <a href="view-reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a>
+                <a href="#" class="nav-link" id="adminLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="admin-profile">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h3>Admin</h3>
+                        <p>Super Administrator</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="sidebar-link active">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="add-venue.html" class="sidebar-link">
+                    <i class="fas fa-plus-circle"></i> Add Venue
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-building"></i> All Venues
+                    <span class="badge">25</span>
+                </a>
+                <a href="manage-bookings.html" class="sidebar-link">
+                    <i class="fas fa-calendar-check"></i> Manage Bookings
+                    <span class="badge badge-warning">12</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-calendar-alt"></i> Calendar View
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-exclamation-triangle"></i> Conflicts
+                    <span class="badge badge-danger">3</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-users"></i> User Management
+                    <span class="badge">542</span>
+                </a>
+                <a href="view-reports.html" class="sidebar-link">
+                    <i class="fas fa-chart-bar"></i> Reports & Analytics
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-cog"></i> System Settings
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-bell"></i> Notifications
+                    <span class="badge badge-primary">5</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <h4><i class="fas fa-server"></i> System Status</h4>
+                    <div class="status-item">
+                        <span>Uptime:</span>
+                        <span class="status-value success">99.8%</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Bookings Today:</span>
+                        <span class="status-value">24</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Active Users:</span>
+                        <span class="status-value">18</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner admin-welcome">
+                <div class="welcome-content">
+                    <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+                    <p>Manage venues, bookings, users, and system settings</p>
+                </div>
+                <div class="welcome-actions">
+                    <div class="admin-quick-stats">
+                        <div class="quick-stat">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3 id="pendingRequests">12</h3>
+                                <p>Pending Requests</p>
+                            </div>
+                        </div>
+                        <div class="quick-stat">
+                            <i class="fas fa-calendar-day"></i>
+                            <div>
+                                <h3 id="todayBookings">8</h3>
+                                <p>Today's Bookings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="admin-stats">
+                <div class="stat-card admin-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalVenues">25</h3>
+                        <p>Total Venues</p>
+                        <span class="stat-change positive">+2 this month</span>
+                    </div>
+                </div>
+                <div class="stat-card admin-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalBookings">1,248</h3>
+                        <p>Total Bookings</p>
+                        <span class="stat-change positive">+12% from last month</span>
+                    </div>
+                </div>
+                <div class="stat-card admin-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalUsers">542</h3>
+                        <p>Registered Users</p>
+                        <span class="stat-change positive">+8% from last month</span>
+                    </div>
+                </div>
+                <div class="stat-card admin-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="utilizationRate">78.5%</h3>
+                        <p>Utilization Rate</p>
+                        <span class="stat-change negative">-2% from last month</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions admin-actions">
+                <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="add-venue.html" class="action-card admin-action">
+                        <div class="action-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Add New Venue</h3>
+                        <p>Add a new venue to the booking system</p>
+                    </a>
+                    <a href="manage-bookings.html" class="action-card admin-action">
+                        <div class="action-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Manage Bookings</h3>
+                        <p>Approve or reject booking requests</p>
+                    </a>
+                    <a href="#" class="action-card admin-action" id="viewCalendarBtn">
+                        <div class="action-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Calendar View</h3>
+                        <p>View all bookings in calendar format</p>
+                    </a>
+                    <a href="view-reports.html" class="action-card admin-action">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Generate Reports</h3>
+                        <p>Create booking and revenue reports</p>
+                    </a>
+                    <a href="#" class="action-card admin-action">
+                        <div class="action-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>User Management</h3>
+                        <p>Manage user accounts and permissions</p>
+                    </a>
+                    <a href="#" class="action-card admin-action">
+                        <div class="action-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>System Settings</h3>
+                        <p>Configure system preferences</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="two-column-layout">
+                <!-- Left Column: Recent Bookings -->
+                <div class="column">
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-history"></i> Recent Booking Requests</h2>
+                            <a href="manage-bookings.html" class="btn-link">View All</a>
+                        </div>
+                        <div class="recent-bookings">
+                            <table class="admin-table compact">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Venue</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentBookingsTable">
+                                    <!-- Recent bookings will be populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Events -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-calendar-day"></i> Today's Events</h2>
+                        </div>
+                        <div class="todays-events" id="todaysEvents">
+                            <!-- Today's events will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Calendar & Notifications -->
+                <div class="column">
+                    <!-- Mini Calendar -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-calendar-alt"></i> Calendar</h2>
+                            <button class="btn btn-sm btn-outline" id="viewFullCalendar">Full View</button>
+                        </div>
+                        <div class="mini-calendar-container" id="miniCalendar">
+                            <!-- Mini calendar will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- System Notifications -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-bell"></i> System Notifications</h2>
+                            <button class="btn btn-sm btn-outline" id="markAllRead">Mark All Read</button>
+                        </div>
+                        <div class="notifications-list" id="notificationsList">
+                            <!-- Notifications will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-chart-pie"></i> Quick Stats</h2>
+                        </div>
+                        <div class="quick-stats-grid">
+                            <div class="quick-stat-item">
+                                <div class="stat-icon-sm success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="stat-content-sm">
+                                    <h4>94%</h4>
+                                    <p>Approval Rate</p>
+                                </div>
+                            </div>
+                            <div class="quick-stat-item">
+                                <div class="stat-icon-sm warning">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-content-sm">
+                                    <h4>2.3</h4>
+                                    <p>Avg. Response Time (hrs)</p>
+                                </div>
+                            </div>
+                            <div class="quick-stat-item">
+                                <div class="stat-icon-sm info">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stat-content-sm">
+                                    <h4>4.8</h4>
+                                    <p>Avg. User Rating</p>
+                                </div>
+                            </div>
+                            <div class="quick-stat-item">
+                                <div class="stat-icon-sm primary">
+                                    <i class="fas fa-repeat"></i>
+                                </div>
+                                <div class="stat-content-sm">
+                                    <h4>65%</h4>
+                                    <p>Repeat Users</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Performing Venues -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-trophy"></i> Top Performing Venues</h2>
+                    <a href="view-reports.html" class="btn-link">View Details</a>
+                </div>
+                <div class="top-venues-list" id="topVenuesList">
+                    <!-- Top venues will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-history"></i> Recent System Activity</h2>
+                </div>
+                <div class="activity-timeline admin-activity" id="adminActivityTimeline">
+                    <!-- Activity will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Calendar Modal -->
+            <div class="modal large" id="calendarModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-calendar-alt"></i> Booking Calendar</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <div class="calendar-nav">
+                                    <button class="btn btn-sm btn-outline" id="prevMonth">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <h3 id="calendarMonth">October 2024</h3>
+                                    <button class="btn btn-sm btn-outline" id="nextMonth">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="calendar-view-options">
+                                    <button class="view-option active" data-view="month">Month</button>
+                                    <button class="view-option" data-view="week">Week</button>
+                                    <button class="view-option" data-view="day">Day</button>
+                                </div>
+                            </div>
+                            <div class="calendar-grid" id="fullCalendar">
+                                <!-- Full calendar will be populated by JS -->
+                            </div>
+                        </div>
+                        <div class="calendar-legend">
+                            <div class="legend-item">
+                                <span class="legend-color booking"></span>
+                                <span>Booked</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color pending"></span>
+                                <span>Pending</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color confirmed"></span>
+                                <span>Confirmed</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color cancelled"></span>
+                                <span>Cancelled</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary modal-close">Close</button>
+                        <button class="btn btn-primary" id="printCalendar">Print Calendar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Details Modal -->
+            <div class="modal" id="adminBookingDetailsModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Booking Details</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="booking-details-admin compact">
+                            <div class="detail-section">
+                                <h4>Booking Information</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span>ID:</span>
+                                        <strong id="adminBookingId">VB-2024-001</strong>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Status:</span>
+                                        <span class="status pending" id="adminBookingStatus">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Schedule</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span>Venue:</span>
+                                        <strong id="adminBookingVenue">Conference Room A</strong>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Date:</span>
+                                        <strong id="adminBookingDate">Oct 15, 2024</strong>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Time:</span>
+                                        <strong id="adminBookingTime">1 PM - 4 PM</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>User Information</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span>Name:</span>
+                                        <strong id="adminBookingUser">John Doe</strong>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Email:</span>
+                                        <span id="adminBookingEmail">john@example.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="action-buttons">
+                            <button class="btn btn-success" id="adminApproveBtn">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button class="btn btn-danger" id="adminRejectBtn">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                            <button class="btn btn-outline modal-close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/admin.js"></script>
+    <script src="scripts/calendar.js"></script>
+    <script src="scripts/booking.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script>
+        // Admin Dashboard Specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAdminDashboard();
+            initializeAdminCalendar();
+            loadAdminData();
+            
+            // Admin Logout
+            const adminLogoutBtn = document.getElementById('adminLogout');
+            if (adminLogoutBtn) {
+                adminLogoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to logout from admin panel?')) {
+                        localStorage.removeItem('currentAdmin');
+                        window.location.href = 'admin-login.html';
+                    }
+                });
+            }
+            
+            // Calendar Modal
+            const viewCalendarBtn = document.getElementById('viewCalendarBtn');
+            const calendarModal = document.getElementById('calendarModal');
+            const viewFullCalendarBtn = document.getElementById('viewFullCalendar');
+            
+            if (viewCalendarBtn && calendarModal) {
+                viewCalendarBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    calendarModal.classList.add('show');
+                });
+            }
+            
+            if (viewFullCalendarBtn && calendarModal) {
+                viewFullCalendarBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    calendarModal.classList.add('show');
+                });
+            }
+            
+            // Print Calendar
+            const printCalendarBtn = document.getElementById('printCalendar');
+            if (printCalendarBtn) {
+                printCalendarBtn.addEventListener('click', function() {
+                    window.print();
+                });
+            }
+            
+            // Mark All Notifications Read
+            const markAllReadBtn = document.getElementById('markAllRead');
+            if (markAllReadBtn) {
+                markAllReadBtn.addEventListener('click', function() {
+                    const notifications = document.querySelectorAll('.notification-item.unread');
+                    notifications.forEach(notification => {
+                        notification.classList.remove('unread');
+                    });
+                    showNotification('All notifications marked as read', 'success');
+                });
+            }
+        });
+        
+        function initializeAdminDashboard() {
+            updateAdminStats();
+            loadRecentBookings();
+            loadTodaysEvents();
+            loadTopVenues();
+            loadNotifications();
+            loadAdminActivity();
+        }
+        
+        function updateAdminStats() {
+            // These would come from API in production
+            document.getElementById('pendingRequests').textContent = '12';
+            document.getElementById('todayBookings').textContent = '8';
+            document.getElementById('totalVenues').textContent = '25';
+            document.getElementById('totalBookings').textContent = '1,248';
+            document.getElementById('totalUsers').textContent = '542';
+            document.getElementById('utilizationRate').textContent = '78.5%';
+        }
+        
+        function loadRecentBookings() {
+            const recentBookingsTable = document.getElementById('recentBookingsTable');
+            if (!recentBookingsTable) return;
+            
+            const recentBookings = [
+                { id: 'VB-2024-010', user: 'John Doe', venue: 'Conference Room A', date: '2024-10-20', status: 'pending' },
+                { id: 'VB-2024-011', user: 'Jane Smith', venue: 'Auditorium Main', date: '2024-10-21', status: 'pending' },
+                { id: 'VB-2024-012', user: 'Robert Johnson', venue: 'Classroom 301', date: '2024-10-22', status: 'pending' },
+                { id: 'VB-2024-013', user: 'Sarah Williams', venue: 'Sports Complex', date: '2024-10-23', status: 'approved' },
+                { id: 'VB-2024-014', user: 'Mike Brown', venue: 'Computer Lab B', date: '2024-10-24', status: 'pending' }
+            ];
+            
+            let tableHTML = '';
+            recentBookings.forEach(booking => {
+                tableHTML += `
+                    <tr>
+                        <td>
+                            <div class="user-info-sm">
+                                <strong>${booking.user}</strong>
+                                <small>${booking.id}</small>
+                            </div>
+                        </td>
+                        <td>${booking.venue}</td>
+                        <td>${formatDate(booking.date)}</td>
+                        <td><span class="status ${booking.status}">${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline view-booking-btn" data-booking-id="${booking.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            recentBookingsTable.innerHTML = tableHTML;
+            
+            // Add event listeners to view buttons
+            const viewButtons = document.querySelectorAll('.view-booking-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookingId = this.getAttribute('data-booking-id');
+                    showAdminBookingDetails(bookingId);
+                });
+            });
+        }
+        
+        function loadTodaysEvents() {
+            const todaysEvents = document.getElementById('todaysEvents');
+            if (!todaysEvents) return;
+            
+            const events = [
+                { time: '9:00 AM', venue: 'Conference Room A', user: 'Team Meeting', status: 'confirmed' },
+                { time: '10:30 AM', venue: 'Classroom 301', user: 'Training Session', status: 'confirmed' },
+                { time: '1:00 PM', venue: 'Auditorium Main', user: 'Conference', status: 'confirmed' },
+                { time: '3:30 PM', venue: 'Computer Lab B', user: 'Workshop', status: 'confirmed' },
+                { time: '6:00 PM', venue: 'Sports Complex', user: 'Sports Event', status: 'pending' }
+            ];
+            
+            let eventsHTML = '';
+            events.forEach(event => {
+                eventsHTML += `
+                    <div class="event-item">
+                        <div class="event-time">${event.time}</div>
+                        <div class="event-details">
+                            <h4>${event.venue}</h4>
+                            <p>${event.user}</p>
+                        </div>
+                        <span class="status ${event.status}">${event.status}</span>
+                    </div>
+                `;
+            });
+            
+            todaysEvents.innerHTML = eventsHTML;
+        }
+        
+        function loadTopVenues() {
+            const topVenuesList = document.getElementById('topVenuesList');
+            if (!topVenuesList) return;
+            
+            const topVenues = [
+                { name: 'Conference Room A', bookings: 128, utilization: '92%', rating: 4.8 },
+                { name: 'Auditorium Main', bookings: 95, utilization: '88%', rating: 4.6 },
+                { name: 'Classroom 301', bookings: 87, utilization: '85%', rating: 4.5 },
+                { name: 'Sports Complex', bookings: 65, utilization: '72%', rating: 4.7 },
+                { name: 'Computer Lab B', bookings: 72, utilization: '80%', rating: 4.4 }
+            ];
+            
+            let venuesHTML = '<div class="top-venues-grid">';
+            topVenues.forEach(venue => {
+                venuesHTML += `
+                    <div class="top-venue-card">
+                        <div class="venue-header">
+                            <h4>${venue.name}</h4>
+                            <div class="venue-rating">
+                                ${generateStarRating(venue.rating)}
+                            </div>
+                        </div>
+                        <div class="venue-stats">
+                            <div class="venue-stat">
+                                <span class="stat-label">Bookings:</span>
+                                <span class="stat-value">${venue.bookings}</span>
+                            </div>
+                            <div class="venue-stat">
+                                <span class="stat-label">Utilization:</span>
+                                <span class="stat-value">${venue.utilization}</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${venue.utilization}"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            venuesHTML += '</div>';
+            
+            topVenuesList.innerHTML = venuesHTML;
+        }
+        
+        function loadNotifications() {
+            const notificationsList = document.getElementById('notificationsList');
+            if (!notificationsList) return;
+            
+            const notifications = [
+                { id: 1, type: 'booking', message: 'New booking request from John Doe', time: '10 min ago', read: false },
+                { id: 2, type: 'system', message: 'System backup completed successfully', time: '1 hour ago', read: true },
+                { id: 3, type: 'alert', message: 'Venue "Conference Room A" has high utilization', time: '2 hours ago', read: false },
+                { id: 4, type: 'user', message: 'New user registration: Sarah Williams', time: '3 hours ago', read: true },
+                { id: 5, type: 'maintenance', message: 'Scheduled maintenance tonight at 2 AM', time: '5 hours ago', read: true }
+            ];
+            
+            let notificationsHTML = '';
+            notifications.forEach(notification => {
+                const icon = {
+                    booking: 'fa-calendar-plus',
+                    system: 'fa-server',
+                    alert: 'fa-exclamation-triangle',
+                    user: 'fa-user-plus',
+                    maintenance: 'fa-tools'
+                }[notification.type];
+                
+                notificationsHTML += `
+                    <div class="notification-item ${notification.read ? '' : 'unread'}" data-notification-id="${notification.id}">
+                        <div class="notification-icon">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p>${notification.message}</p>
+                            <small>${notification.time}</small>
+                        </div>
+                        ${!notification.read ? '<span class="notification-dot"></span>' : ''}
+                    </div>
+                `;
+            });
+            
+            notificationsList.innerHTML = notificationsHTML;
+            
+            // Add click event to notifications
+            const notificationItems = document.querySelectorAll('.notification-item');
+            notificationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const notificationId = this.getAttribute('data-notification-id');
+                    markNotificationAsRead(notificationId);
+                    this.classList.remove('unread');
+                });
+            });
+        }
+        
+        function loadAdminActivity() {
+            const activityTimeline = document.getElementById('adminActivityTimeline');
+            if (!activityTimeline) return;
+            
+            const activities = [
+                { time: '10:30 AM', user: 'Admin', action: 'Approved booking VB-2024-009', icon: 'fa-check-circle' },
+                { time: '9:45 AM', user: 'System', action: 'Automated backup completed', icon: 'fa-server' },
+                { time: '9:15 AM', user: 'John Doe', action: 'Submitted new booking request', icon: 'fa-calendar-plus' },
+                { time: 'Yesterday, 5:30 PM', user: 'Admin', action: 'Added new venue "Meeting Room 2"', icon: 'fa-plus-circle' },
+                { time: 'Yesterday, 3:15 PM', user: 'System', action: 'Generated monthly report', icon: 'fa-chart-bar' }
+            ];
+            
+            let activityHTML = '';
+            activities.forEach(activity => {
+                activityHTML += `
+                    <div class="activity-item">
+                        <div class="activity-time">${activity.time}</div>
+                        <div class="activity-content">
+                            <div class="activity-icon">
+                                <i class="fas ${activity.icon}"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>${activity.user}</h4>
+                                <p>${activity.action}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            activityTimeline.innerHTML = activityHTML;
+        }
+        
+        function markNotificationAsRead(notificationId) {
+            // In production, this would make an API call
+            console.log(`Marking notification ${notificationId} as read`);
+        }
+        
+        function showAdminBookingDetails(bookingId) {
+            const modal = document.getElementById('adminBookingDetailsModal');
+            if (!modal) return;
+            
+            // In production, this would fetch booking details from API
+            // For demo, we'll use sample data
+            document.getElementById('adminBookingId').textContent = bookingId;
+            document.getElementById('adminBookingVenue').textContent = 'Conference Room A';
+            document.getElementById('adminBookingDate').textContent = 'Oct 20, 2024';
+            document.getElementById('adminBookingTime').textContent = '1 PM - 4 PM';
+            document.getElementById('adminBookingUser').textContent = 'John Doe';
+            document.getElementById('adminBookingEmail').textContent = 'john.doe@example.com';
+            
+            modal.classList.add('show');
+            
+            // Add event listeners to action buttons
+            const approveBtn = document.getElementById('adminApproveBtn');
+            const rejectBtn = document.getElementById('adminRejectBtn');
+            
+            if (approveBtn) {
+                approveBtn.onclick = function() {
+                    approveBookingAdmin(bookingId);
+                };
+            }
+            
+            if (rejectBtn) {
+                rejectBtn.onclick = function() {
+                    rejectBookingAdmin(bookingId);
+                };
+            }
+        }
+        
+        function approveBookingAdmin(bookingId) {
+            if (confirm(`Approve booking ${bookingId}?`)) {
+                showNotification(`Booking ${bookingId} approved successfully`, 'success');
+                const modal = document.getElementById('adminBookingDetailsModal');
+                if (modal) modal.classList.remove('show');
+                
+                // Update UI
+                setTimeout(() => {
+                    loadRecentBookings();
+                }, 500);
+            }
+        }
+        
+        function rejectBookingAdmin(bookingId) {
+            const reason = prompt('Enter rejection reason:');
+            if (reason) {
+                showNotification(`Booking ${bookingId} rejected. Reason: ${reason}`, 'success');
+                const modal = document.getElementById('adminBookingDetailsModal');
+                if (modal) modal.classList.remove('show');
+                
+                // Update UI
+                setTimeout(() => {
+                    loadRecentBookings();
+                }, 500);
+            }
+        }
+        
+        function generateStarRating(rating) {
+            let starsHTML = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    starsHTML += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    starsHTML += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    starsHTML += '<i class="far fa-star"></i>';
+                }
+            }
+            
+            return starsHTML;
+        }
+        
+        function loadAdminData() {
+            // This function would load all admin data from APIs
+            console.log('Loading admin dashboard data...');
+        }
+    </script>
+</body>
+</html>

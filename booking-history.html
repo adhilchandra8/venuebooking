@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History | Venue Booking System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/user.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calendar-alt"></i>
+                <span>VenueBook</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="view-venues.html" class="nav-link"><i class="fas fa-building"></i> Venues</a>
+                <a href="user-dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="booking-history.html" class="nav-link active"><i class="fas fa-history"></i> My Bookings</a>
+                <div class="user-menu">
+                    <button class="user-dropdown">
+                        <i class="fas fa-user-circle"></i>
+                        <span>John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="history-container">
+        <!-- Sidebar -->
+        <aside class="history-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-filter"></i> Filter Bookings</h3>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Status</h4>
+                <div class="status-filters">
+                    <button class="status-filter active" data-status="all">All</button>
+                    <button class="status-filter" data-status="pending">Pending</button>
+                    <button class="status-filter" data-status="approved">Approved</button>
+                    <button class="status-filter" data-status="confirmed">Confirmed</button>
+                    <button class="status-filter" data-status="completed">Completed</button>
+                    <button class="status-filter" data-status="rejected">Rejected</button>
+                    <button class="status-filter" data-status="cancelled">Cancelled</button>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Date Range</h4>
+                <div class="form-group">
+                    <label for="dateFrom">From</label>
+                    <input type="date" id="dateFrom" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="dateTo">To</label>
+                    <input type="date" id="dateTo" class="form-control">
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Venue Type</h4>
+                <div class="checkbox-group">
+                    <label class="checkbox">
+                        <input type="checkbox" name="venueFilter" value="all" checked>
+                        <span>All Types</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="venueFilter" value="conference">
+                        <span>Conference Room</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="venueFilter" value="auditorium">
+                        <span>Auditorium</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="venueFilter" value="classroom">
+                        <span>Classroom</span>
+                    </label>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary btn-block" id="applyHistoryFilters">
+                <i class="fas fa-filter"></i> Apply Filters
+            </button>
+            
+            <div class="sidebar-stats">
+                <h4>Booking Stats</h4>
+                <div class="stat-item">
+                    <span>Total Bookings:</span>
+                    <strong id="totalBookings">24</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Upcoming:</span>
+                    <strong id="upcomingBookings">5</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Completed:</span>
+                    <strong id="completedBookings">15</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Pending:</span>
+                    <strong id="pendingBookings">3</strong>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="history-main">
+            <div class="history-header">
+                <h1><i class="fas fa-history"></i> My Booking History</h1>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="exportBtn">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="btn btn-primary" id="newBookingBtn">
+                        <i class="fas fa-calendar-plus"></i> New Booking
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Bookings Tabs -->
+            <div class="bookings-tabs">
+                <button class="tab-btn active" data-tab="upcoming">Upcoming <span class="tab-badge">5</span></button>
+                <button class="tab-btn" data-tab="pending">Pending Approval <span class="tab-badge">3</span></button>
+                <button class="tab-btn" data-tab="past">Past Bookings <span class="tab-badge">15</span></button>
+                <button class="tab-btn" data-tab="cancelled">Cancelled <span class="tab-badge">1</span></button>
+            </div>
+            
+            <!-- Bookings Table -->
+            <div class="bookings-table-container">
+                <div class="table-responsive">
+                    <table class="bookings-table">
+                        <thead>
+                            <tr>
+                                <th>Venue</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Attendees</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <!-- Bookings will be populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- No Results -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>No Bookings Found</h3>
+                    <p>Try changing your filters or make a new booking.</p>
+                    <a href="view-venues.html" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Browse Venues
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Booking Details Modal -->
+            <div class="modal" id="bookingDetailsModal">
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h3>Booking Details</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="booking-details">
+                            <div class="detail-section">
+                                <h4><i class="fas fa-info-circle"></i> Booking Information</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Booking ID:</span>
+                                        <span class="detail-value" id="detailId">VB-2024-001</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Status:</span>
+                                        <span class="detail-value">
+                                            <span class="status approved" id="detailStatus">Approved</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Booking Date:</span>
+                                        <span class="detail-value" id="detailDate">October 15, 2024</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Time Slot:</span>
+                                        <span class="detail-value" id="detailTime">Afternoon (1 PM - 4 PM)</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Created On:</span>
+                                        <span class="detail-value" id="detailCreated">October 10, 2024</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Last Updated:</span>
+                                        <span class="detail-value" id="detailUpdated">October 12, 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><i class="fas fa-building"></i> Venue Details</h4>
+                                <div class="venue-card detail">
+                                    <div class="venue-image">
+                                        <img src="https://via.placeholder.com/150x100" alt="Venue">
+                                    </div>
+                                    <div class="venue-info">
+                                        <h4 id="detailVenueName">Conference Room A</h4>
+                                        <p><i class="fas fa-users"></i> Capacity: <span id="detailCapacity">50</span> people</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> <span id="detailLocation">Main Campus, Building A</span></p>
+                                        <p><i class="fas fa-wifi"></i> Amenities: <span id="detailAmenities">Wi-Fi, Projector, AC</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><i class="fas fa-user"></i> User Information</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Booked By:</span>
+                                        <span class="detail-value" id="detailUser">John Doe</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Email:</span>
+                                        <span class="detail-value" id="detailEmail">john.doe@example.com</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Phone:</span>
+                                        <span class="detail-value" id="detailPhone">+1 (555) 123-4567</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Organization:</span>
+                                        <span class="detail-value" id="detailOrg">University of Technology</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><i class="fas fa-file-alt"></i> Booking Purpose</h4>
+                                <div class="purpose-details">
+                                    <p><strong>Purpose:</strong> <span id="detailPurpose">Team Meeting</span></p>
+                                    <p><strong>Expected Attendees:</strong> <span id="detailAttendees">25</span></p>
+                                    <p><strong>Additional Notes:</strong></p>
+                                    <div class="notes-box" id="detailNotes">
+                                        <p>Need projector setup and whiteboard markers. Will require video conference facilities.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><i class="fas fa-history"></i> Status History</h4>
+                                <div class="timeline" id="statusTimeline">
+                                    <!-- Status timeline will be populated by JS -->
+                                </div>
+                            </div>
+                            
+                            <div class="detail-actions">
+                                <button class="btn btn-secondary" id="cancelBookingBtn">
+                                    <i class="fas fa-times"></i> Cancel Booking
+                                </button>
+                                <button class="btn btn-primary" id="modifyBookingBtn">
+                                    <i class="fas fa-edit"></i> Request Modification
+                                </button>
+                                <button class="btn btn-outline" id="printDetailsBtn">
+                                    <i class="fas fa-print"></i> Print Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cancel Booking Modal -->
+            <div class="modal" id="cancelModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Cancel Booking</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to cancel this booking?</p>
+                        <div class="booking-info">
+                            <strong id="cancelVenueName">Conference Room A</strong>
+                            <p>Date: <span id="cancelDate">October 15, 2024</span></p>
+                            <p>Time: <span id="cancelTime">1 PM - 4 PM</span></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="cancelReason">Cancellation Reason</label>
+                            <select id="cancelReason" class="form-select">
+                                <option value="">Select reason...</option>
+                                <option value="schedule">Schedule Conflict</option>
+                                <option value="venue">Found Better Venue</option>
+                                <option value="cancelled">Event Cancelled</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cancelNotes">Additional Notes</label>
+                            <textarea id="cancelNotes" class="form-control" rows="3" placeholder="Optional details..."></textarea>
+                        </div>
+                        <div class="cancellation-policy">
+                            <h4><i class="fas fa-info-circle"></i> Cancellation Policy</h4>
+                            <ul>
+                                <li>Cancellations within 24 hours may incur a fee</li>
+                                <li>Frequent cancellations may affect future bookings</li>
+                                <li>Admin approval is required for refunds (if applicable)</li>
+                            </ul>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn btn-secondary modal-close">Keep Booking</button>
+                            <button type="button" class="btn btn-danger" id="confirmCancelBtn">
+                                <i class="fas fa-times"></i> Confirm Cancellation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/booking.js"></script>
+    <script src="scripts/utils.js"></script>
+</body>
+</html>

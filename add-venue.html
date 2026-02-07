@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Venue | Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calendar-alt"></i>
+                <span>VenueBook</span>
+                <span class="admin-badge">Admin</span>
+            </a>
+            <div class="nav-menu">
+                <a href="admin-dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="add-venue.html" class="nav-link active"><i class="fas fa-plus-circle"></i> Add Venue</a>
+                <a href="manage-bookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> Manage Bookings</a>
+                <a href="view-reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a>
+                <a href="admin-login.html" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-cog"></i> Admin Panel</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="sidebar-link">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="add-venue.html" class="sidebar-link active">
+                    <i class="fas fa-plus-circle"></i> Add Venue
+                </a>
+                <a href="manage-bookings.html" class="sidebar-link">
+                    <i class="fas fa-calendar-check"></i> Manage Bookings
+                    <span class="badge">12</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-building"></i> All Venues
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-users"></i> User Management
+                </a>
+                <a href="view-reports.html" class="sidebar-link">
+                    <i class="fas fa-chart-bar"></i> Reports
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="page-header">
+                <h1><i class="fas fa-plus-circle"></i> Add New Venue</h1>
+                <p>Add a new venue to the booking system</p>
+            </div>
+
+            <div class="add-venue-form">
+                <form id="venueForm">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="venueName">Venue Name *</label>
+                                <input type="text" id="venueName" class="form-control" placeholder="e.g., Conference Room A" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="venueCode">Venue Code *</label>
+                                <input type="text" id="venueCode" class="form-control" placeholder="e.g., CONF-A" required>
+                                <div class="form-hint">Unique identifier for the venue</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="venueType">Venue Type *</label>
+                                <select id="venueType" class="form-control" required>
+                                    <option value="">Select type</option>
+                                    <option value="conference">Conference Room</option>
+                                    <option value="auditorium">Auditorium</option>
+                                    <option value="classroom">Classroom</option>
+                                    <option value="sports">Sports Complex</option>
+                                    <option value="lab">Laboratory</option>
+                                    <option value="hall">Community Hall</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="capacity">Capacity *</label>
+                                <input type="number" id="capacity" class="form-control" min="1" max="1000" placeholder="e.g., 50" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Details -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-map-marker-alt"></i> Location Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="building">Building *</label>
+                                <input type="text" id="building" class="form-control" placeholder="e.g., Main Building" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="floor">Floor</label>
+                                <input type="text" id="floor" class="form-control" placeholder="e.g., 3rd Floor">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="roomNumber">Room Number</label>
+                                <input type="text" id="roomNumber" class="form-control" placeholder="e.g., 301">
+                            </div>
+                            <div class="form-group">
+                                <label for="campus">Campus *</label>
+                                <select id="campus" class="form-control" required>
+                                    <option value="">Select campus</option>
+                                    <option value="main">Main Campus</option>
+                                    <option value="north">North Campus</option>
+                                    <option value="south">South Campus</option>
+                                    <option value="east">East Wing</option>
+                                    <option value="west">West Wing</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="directions">Directions/Additional Info</label>
+                            <textarea id="directions" class="form-control" rows="3" placeholder="Any specific directions or location details..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Amenities & Facilities -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-wifi"></i> Amenities & Facilities</h3>
+                        <div class="amenities-grid">
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-wifi" name="amenities" value="wifi">
+                                <label for="amenity-wifi">
+                                    <i class="fas fa-wifi"></i>
+                                    <span>Wi-Fi</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-projector" name="amenities" value="projector">
+                                <label for="amenity-projector">
+                                    <i class="fas fa-video"></i>
+                                    <span>Projector</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-ac" name="amenities" value="ac">
+                                <label for="amenity-ac">
+                                    <i class="fas fa-snowflake"></i>
+                                    <span>Air Conditioning</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-sound" name="amenities" value="sound">
+                                <label for="amenity-sound">
+                                    <i class="fas fa-volume-up"></i>
+                                    <span>Sound System</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-whiteboard" name="amenities" value="whiteboard">
+                                <label for="amenity-whiteboard">
+                                    <i class="fas fa-chalkboard"></i>
+                                    <span>Whiteboard</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-tv" name="amenities" value="tv">
+                                <label for="amenity-tv">
+                                    <i class="fas fa-tv"></i>
+                                    <span>TV/Display</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-catering" name="amenities" value="catering">
+                                <label for="amenity-catering">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Catering Available</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-parking" name="amenities" value="parking">
+                                <label for="amenity-parking">
+                                    <i class="fas fa-parking"></i>
+                                    <span>Parking</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-wheelchair" name="amenities" value="wheelchair">
+                                <label for="amenity-wheelchair">
+                                    <i class="fas fa-wheelchair"></i>
+                                    <span>Wheelchair Accessible</span>
+                                </label>
+                            </div>
+                            <div class="amenity-item">
+                                <input type="checkbox" id="amenity-security" name="amenities" value="security">
+                                <label for="amenity-security">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>24/7 Security</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="additionalAmenities">Additional Amenities</label>
+                            <textarea id="additionalAmenities" class="form-control" rows="2" placeholder="Any other amenities not listed above..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Booking Rules -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-calendar-alt"></i> Booking Rules</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="minBookingHours">Minimum Booking Hours *</label>
+                                <input type="number" id="minBookingHours" class="form-control" min="1" max="24" value="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxBookingHours">Maximum Booking Hours *</label>
+                                <input type="number" id="maxBookingHours" class="form-control" min="1" max="24" value="8" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="advanceBookingDays">Advance Booking (Days) *</label>
+                                <input type="number" id="advanceBookingDays" class="form-control" min="1" max="365" value="30" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cancellationHours">Cancellation Notice (Hours) *</label>
+                                <input type="number" id="cancellationHours" class="form-control" min="1" max="168" value="24" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bookingSlots">Available Time Slots *</label>
+                            <div class="time-slots">
+                                <div class="slot-option">
+                                    <input type="checkbox" id="slot-morning" name="slots" value="morning" checked>
+                                    <label for="slot-morning">Morning (9 AM - 12 PM)</label>
+                                </div>
+                                <div class="slot-option">
+                                    <input type="checkbox" id="slot-afternoon" name="slots" value="afternoon" checked>
+                                    <label for="slot-afternoon">Afternoon (1 PM - 4 PM)</label>
+                                </div>
+                                <div class="slot-option">
+                                    <input type="checkbox" id="slot-evening" name="slots" value="evening" checked>
+                                    <label for="slot-evening">Evening (5 PM - 8 PM)</label>
+                                </div>
+                                <div class="slot-option">
+                                    <input type="checkbox" id="slot-full" name="slots" value="full">
+                                    <label for="slot-full">Full Day (9 AM - 8 PM)</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="blackoutDates">Blackout Dates (Optional)</label>
+                            <textarea id="blackoutDates" class="form-control" rows="3" placeholder="Enter specific dates when venue is unavailable (YYYY-MM-DD), one per line"></textarea>
+                            <div class="form-hint">Format: YYYY-MM-DD (e.g., 2024-12-25)</div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-dollar-sign"></i> Pricing (Optional)</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pricePerHour">Price per Hour ($)</label>
+                                <input type="number" id="pricePerHour" class="form-control" min="0" step="0.01" placeholder="e.g., 50.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="pricePerDay">Price per Day ($)</label>
+                                <input type="number" id="pricePerDay" class="form-control" min="0" step="0.01" placeholder="e.g., 300.00">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="discountGroups">Discount Groups</label>
+                            <textarea id="discountGroups" class="form-control" rows="3" placeholder="e.g., Students: 20% discount&#10;Faculty: 15% discount&#10;Bulk booking: 10% discount"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Images & Documents -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-images"></i> Images & Documents</h3>
+                        <div class="form-group">
+                            <label for="venueImages">Venue Images</label>
+                            <div class="image-upload">
+                                <div class="upload-area" id="uploadArea">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Drag & drop venue images here</p>
+                                    <p class="upload-hint">or click to browse</p>
+                                    <input type="file" id="venueImages" multiple accept="image/*" style="display: none;">
+                                </div>
+                                <div class="uploaded-images" id="uploadedImages">
+                                    <!-- Uploaded images preview will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="floorPlan">Floor Plan (Optional)</label>
+                            <input type="file" id="floorPlan" class="form-control" accept=".pdf,.jpg,.png">
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-toggle-on"></i> Status</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="venueStatus">Venue Status *</label>
+                                <select id="venueStatus" class="form-control" required>
+                                    <option value="active">Active (Available for booking)</option>
+                                    <option value="inactive">Inactive (Not available)</option>
+                                    <option value="maintenance">Under Maintenance</option>
+                                    <option value="renovation">Renovation</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="adminNotes">Admin Notes</label>
+                                <textarea id="adminNotes" class="form-control" rows="3" placeholder="Internal notes about this venue..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="previewBtn">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                        <button type="button" class="btn btn-outline" id="saveDraftBtn">
+                            <i class="fas fa-save"></i> Save as Draft
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Add Venue
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="modal large" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Venue Preview</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="venue-preview-card">
+                    <div class="preview-header">
+                        <h2 id="previewName">Conference Room A</h2>
+                        <span class="status active" id="previewStatus">Active</span>
+                    </div>
+                    <div class="preview-content">
+                        <div class="preview-section">
+                            <h4>Basic Information</h4>
+                            <div class="preview-grid">
+                                <div class="preview-item">
+                                    <span>Venue Code:</span>
+                                    <strong id="previewCode">CONF-A</strong>
+                                </div>
+                                <div class="preview-item">
+                                    <span>Type:</span>
+                                    <strong id="previewType">Conference Room</strong>
+                                </div>
+                                <div class="preview-item">
+                                    <span>Capacity:</span>
+                                    <strong id="previewCapacity">50 people</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-section">
+                            <h4>Location</h4>
+                            <div class="preview-grid">
+                                <div class="preview-item">
+                                    <span>Building:</span>
+                                    <strong id="previewBuilding">Main Building</strong>
+                                </div>
+                                <div class="preview-item">
+                                    <span>Floor:</span>
+                                    <strong id="previewFloor">3rd Floor</strong>
+                                </div>
+                                <div class="preview-item">
+                                    <span>Campus:</span>
+                                    <strong id="previewCampus">Main Campus</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-section">
+                            <h4>Amenities</h4>
+                            <div class="amenities-preview" id="previewAmenities">
+                                <!-- Amenities will be populated by JS -->
+                            </div>
+                        </div>
+                        
+                        <div class="preview-section">
+                            <h4>Booking Rules</h4>
+                            <div class="preview-grid">
+                                <div class="preview-item">
+                                    <span>Min Booking:</span>
+                                    <strong id="previewMinHours">1 hour</strong>
+                                </div>
+                                <div class="preview-item">
+                                    <span>Max Booking:</span>
+                                    <strong id="previewMaxHours">8 hours</strong>
+                                </div>
+                                <div class="preview-item">
+                                    <span>Advance Booking:</span>
+                                    <strong id="previewAdvanceDays">30 days</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary modal-close">Close</button>
+                <button type="button" class="btn btn-primary" id="confirmAddBtn">Confirm & Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/admin.js"></script>
+    <script src="scripts/venue.js"></script>
+    <script src="scripts/utils.js"></script>
+</body>
+</html>

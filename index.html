@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Booking System | Smart Venue Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/calendar.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calendar-alt"></i>
+                <span>VenueBook</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="view-venues.html" class="nav-link"><i class="fas fa-building"></i> Venues</a>
+                <a href="#features" class="nav-link"><i class="fas fa-star"></i> Features</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+                <div class="auth-buttons">
+                    <a href="user-login.html" class="btn btn-outline"><i class="fas fa-user"></i> User Login</a>
+                    <a href="admin-login.html" class="btn btn-primary"><i class="fas fa-lock"></i> Admin Login</a>
+                </div>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Smart Venue Booking & Management System</h1>
+                <p class="hero-subtitle">Streamline venue reservations for colleges, conference rooms, and sports complexes with our intelligent booking platform.</p>
+                <div class="hero-buttons">
+                    <a href="user-register.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-user-plus"></i> Register Now
+                    </a>
+                    <a href="view-venues.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-search"></i> Browse Venues
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="dashboard-preview">
+                    <div class="calendar-preview">
+                        <div class="calendar-header">
+                            <span>October 2024</span>
+                        </div>
+                        <div class="calendar-grid">
+                            <!-- Calendar days will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Easy Booking</h3>
+                    <p>View available venues, check availability by date/time, and book instantly with confirmation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Smart Notifications</h3>
+                    <p>Get email/SMS notifications for booking confirmations, reminders, and updates.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Calendar View</h3>
+                    <p>Visual calendar interface to see all bookings at a glance with color-coded status.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Advanced Reports</h3>
+                    <p>Generate detailed reports on venue usage, booking history, and analytics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Rating System</h3>
+                    <p>Provide feedback and ratings after venue usage to help others make decisions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Admin Control</h3>
+                    <p>Comprehensive admin panel to manage venues, bookings, and user requests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User/Admin Modules Section -->
+    <section class="modules">
+        <div class="container">
+            <h2 class="section-title">User & Admin Modules</h2>
+            <div class="modules-container">
+                <div class="module-card user-module">
+                    <h3><i class="fas fa-user"></i> User Module</h3>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Register/Login System</li>
+                        <li><i class="fas fa-check-circle"></i> View Venue List with Filters</li>
+                        <li><i class="fas fa-check-circle"></i> Check Availability by Date/Time</li>
+                        <li><i class="fas fa-check-circle"></i> Book Venue & Get Confirmation</li>
+                        <li><i class="fas fa-check-circle"></i> Booking History & Status Tracking</li>
+                        <li><i class="fas fa-check-circle"></i> Rate & Review Venues</li>
+                    </ul>
+                    <a href="user-login.html" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Access User Portal
+                    </a>
+                </div>
+                <div class="module-card admin-module">
+                    <h3><i class="fas fa-user-shield"></i> Admin Module</h3>
+                    <ul class="module-features">
+                        <li><i class="fas fa-check-circle"></i> Add/Edit/Delete Venues</li>
+                        <li><i class="fas fa-check-circle"></i> View All Bookings</li>
+                        <li><i class="fas fa-check-circle"></i> Approve/Reject Booking Requests</li>
+                        <li><i class="fas fa-check-circle"></i> Conflict Detection System</li>
+                        <li><i class="fas fa-check-circle"></i> Generate Detailed Reports</li>
+                        <li><i class="fas fa-check-circle"></i> Manage User Accounts</li>
+                    </ul>
+                    <a href="admin-login.html" class="btn btn-secondary">
+                        <i class="fas fa-lock"></i> Access Admin Panel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-building"></i>
+                    <h3 id="venueCount">25+</h3>
+                    <p>Venues Available</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3 id="bookingCount">1,200+</h3>
+                    <p>Bookings Completed</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3 id="userCount">500+</h3>
+                    <p>Registered Users</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <h3 id="ratingCount">4.8</h3>
+                    <p>Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-calendar-alt"></i> VenueBook</h3>
+                    <p>Smart venue booking and management system for educational institutions, corporate offices, and event spaces.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="view-venues.html">Browse Venues</a>
+                    <a href="user-login.html">User Login</a>
+                    <a href="admin-login.html">Admin Login</a>
+                    <a href="#features">Features</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> support@venuebook.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Venue Booking System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/utils.js"></script>
+</body>
+</html>
